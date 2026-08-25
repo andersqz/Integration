@@ -4,7 +4,7 @@ namespace Integration.Api.Models
     {
         public int IdEmpresa { get; set;}
         public string IdProduto { get; set; } = string.Empty;
-        public string CodigoEAN { get; set; }
+        public string CodigoEAN { get; set; } = String.Empty;
         public int TipoProduto { get; set; }
         public string Descricao { get; set; } = string.Empty;
         public string DescricaoReduzida { get; set; } = string.Empty;

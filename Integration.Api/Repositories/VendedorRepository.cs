@@ -37,7 +37,7 @@ namespace Integration.Api.Repositories
                         FROM 
                             GES_068 
                         WHERE 
-                            VendedorId = ?
+                            VEN001 = ?
                         ORDER BY 
                             VendedorId";
 

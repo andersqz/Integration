@@ -37,3 +37,4 @@ C:\dev\Integration\Integration.Api\obj\Debug\net8.0\refint\Integration.Api.dll
 C:\dev\Integration\Integration.Api\obj\Debug\net8.0\Integration.Api.pdb
 C:\dev\Integration\Integration.Api\obj\Debug\net8.0\Integration.Api.genruntimeconfig.cache
 C:\dev\Integration\Integration.Api\obj\Debug\net8.0\ref\Integration.Api.dll
+C:\dev\Integration\Integration.Api\obj\Debug\net8.0\Integration.Api.sourcelink.json

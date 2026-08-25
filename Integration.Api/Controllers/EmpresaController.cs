@@ -1,5 +1,6 @@
 
 using Integration.Api.Dtos;
+using Integration.Api.Exceptions;
 using Integration.Api.Interfaces;
 
 using Microsoft.AspNetCore.Mvc;
@@ -17,16 +18,31 @@ namespace Integration.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<EmpresaDto> empresas = await _service.BuscarTodos();
-            return Ok(empresas);
+            try
+            {
+                IEnumerable<EmpresaDto> empresas = await _service.BuscarTodos();
+                return Ok(empresas);
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            EmpresaDto empresa = await _service.BuscarPorId(id);
-            return Ok(empresa);
+            try
+            {
+                EmpresaDto empresa = await _service.BuscarPorId(id);
+                return Ok(empresa);
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            
         }
     }
 }
