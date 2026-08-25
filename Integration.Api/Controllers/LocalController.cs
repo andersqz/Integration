@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Api.Dtos;
+using Integration.Api.Exceptions;
 using Integration.Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,15 +20,31 @@ namespace Integration.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<LocalDto> locais = await _service.BuscarTodos();
-            return Ok(locais);
+            try
+            {
+                IEnumerable<LocalDto> locais = await _service.BuscarTodos();
+                return Ok(locais);
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            LocalDto local = await _service.BuscarPorId(id);
-            return Ok(local);
+            try
+            {
+                LocalDto local = await _service.BuscarPorId(id);
+                return Ok(local);
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            
         }
     }
 }
