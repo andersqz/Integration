@@ -1,18 +1,21 @@
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Integration.Api.Dtos;
 using Integration.Api.Exceptions;
 using Integration.Api.Interfaces;
-
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Integration.Api.Controllers
 {
     [ApiController]
-    [Route("api/empresa")]
-    public class EmpresaController : ControllerBase
+    [Route("api/vendedor")]
+    public class VendedorController : ControllerBase
     {
-        private readonly IEmpresaService _service;
-        public EmpresaController(IEmpresaService service)
+        private readonly IVendedorService _service;
+        public VendedorController(IVendedorService service)
             => _service = service;
 
         [HttpGet]
@@ -20,29 +23,27 @@ namespace Integration.Api.Controllers
         {
             try
             {
-                IEnumerable<EmpresaDto> empresas = await _service.BuscarTodos();
-                return Ok(empresas);
+                IEnumerable<VendedorDto> vendedores = await _service.BuscarTodos();
+                return Ok(vendedores);
             }
             catch (NotFoundException e)
             {
                 return NotFound(e.Message);
-            }
+            } 
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                EmpresaDto empresa = await _service.BuscarPorId(id);
-                return Ok(empresa);
+                VendedorDetalhesDto vendedor = await _service.BuscarPorId(id);
+                return Ok(vendedor);
             }
             catch (NotFoundException e)
             {
                 return NotFound(e.Message);
             }
-            
         }
     }
 }

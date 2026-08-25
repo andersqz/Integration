@@ -6,6 +6,7 @@ using Integration.Api.Dtos;
 using Integration.Api.Exceptions;
 using Integration.Api.Interfaces;
 using Integration.Api.Models;
+using Integration.Api.Utils;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Integration.Api.Services
@@ -47,8 +48,8 @@ namespace Integration.Api.Services
                 PesoLiquido = p.PesoLiquido,
                 ForaDeLinha = p.ForaDeLinha,
                 ControlaEstoque = p.ControlaEstoque,
-                DataAlteracao = ConverterData(p.DataAlteracao),
-                DataCadastro = ConverterData(p.DataCadastro),
+                DataAlteracao = Util.ConverterData(p.DataAlteracao),
+                DataCadastro = Util.ConverterData(p.DataCadastro),
                 DisponivelInternet = p.DisponivelInternet,
 
                 IcmsSubstituicaoCompra = f.IcmsSubstituicaoCompra,
@@ -81,21 +82,13 @@ namespace Integration.Api.Services
                     TipoProduto = p.TipoProduto,
                     Descricao = p.Descricao,
                     ForaDeLinha = p.ForaDeLinha,
-                    DataAlteracao = ConverterData(p.DataAlteracao)
+                    DataAlteracao = Util.ConverterData(p.DataAlteracao)
                 };
 
                 responses.Add(dto);
             }
 
             return responses;
-        }
-
-
-        private static DateOnly ConverterData(int valor)
-        {
-            return DateOnly.FromDateTime(
-                new DateTime(1800, 12, 28).AddDays(valor)
-            );
         }
     }
 }
