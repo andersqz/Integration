@@ -24,7 +24,6 @@ namespace Integration.Api.Dtos
 
 
         // fiscal
-        public string CodigoProduto { get; set; } = string.Empty;     // PRD001 - FK
         public bool IcmsSubstituicaoCompra { get; set; }  // PRD013
         public bool IcmsSubstituicaoVenda { get; set; }   // PRD014
         public decimal PercentualIcmsSubstituicao { get; set; } // PRD015

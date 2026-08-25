@@ -33,7 +33,7 @@ namespace Integration.Api.Repositories
                             FROM 
                                 GES_008 
                             WHERE
-                                LocalId = ?
+                                LCL001 = ?
                             ORDER BY
                                 LocalId";
 
