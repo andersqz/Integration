@@ -8,7 +8,7 @@ namespace Integration.Api.Interfaces
 {
     public interface IVendedorService
     {
-        Task<IEnumerable<VendedorDto>> SelecionarTodos();
-        Task<VendedorDetalhesDto> SelecionarPorId(int id);
+        Task<IEnumerable<VendedorDto>> BuscarTodos();
+        Task<VendedorDetalhesDto> BuscarPorId(int id);
     }
 }
