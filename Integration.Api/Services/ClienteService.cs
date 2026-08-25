@@ -2,6 +2,7 @@ using Integration.Api.Dtos;
 using Integration.Api.Exceptions;
 using Integration.Api.Interfaces;
 using Integration.Api.Models;
+using Integration.Api.Utils;
 
 namespace Integration.Api.Services
 {
@@ -35,7 +36,7 @@ namespace Integration.Api.Services
                 InscricaoEstadual = cliente.InscricaoEstadual,
                 Telefone = cliente.Telefone,
                 Email = cliente.Email,
-                DataNascimento = ConverterData(cliente.DataNascimento),
+                DataNascimento = Util.ConverterData(cliente.DataNascimento),
                 Sexo = cliente.Sexo,
                 Cidade = cliente.Cidade
             };
@@ -62,15 +63,6 @@ namespace Integration.Api.Services
                 responses.Add(dto);
             }
             return responses;
-        }
-
-
-
-        private static DateOnly ConverterData(int valor)
-        {
-            return DateOnly.FromDateTime(
-                new DateTime(1800, 12, 28).AddDays(valor)
-            );
         }
     }
 }
