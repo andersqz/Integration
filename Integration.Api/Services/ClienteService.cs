@@ -24,8 +24,8 @@ namespace Integration.Api.Services
 
             ClienteDetalhesDto dto = new()
             {
-                IdEmpresa = cliente.IdEmpresa,
-                IdCliente = cliente.IdCliente,
+                IdEmpresa = cliente.EmpresaId,
+                IdCliente = cliente.ClienteId,
                 Nome = cliente.Nome,
                 NomeFantasia = cliente.NomeFantasia,
                 Endereco = cliente.Endereco,
@@ -53,7 +53,7 @@ namespace Integration.Api.Services
             {
                 ClienteDto dto = new()
                 {
-                    IdCliente = c.IdCliente,
+                    IdCliente = c.ClienteId,
                     Nome = c.Nome,
                     CpfCnpj = c.CpfCnpj,
                     Telefone = c.Telefone,

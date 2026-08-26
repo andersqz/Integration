@@ -32,8 +32,8 @@ namespace Integration.Api.Services
 
             ProdutoDetalhesDto dto = new()
             {
-                IdEmpresa = p.IdEmpresa,
-                IdProduto = p.IdProduto,
+                IdEmpresa = p.EmpresaId,
+                IdProduto = p.ProdutoId,
                 CodigoEAN = p.CodigoEAN,
                 TipoProduto = p.TipoProduto,
                 Descricao = p.Descricao,
@@ -77,7 +77,7 @@ namespace Integration.Api.Services
             {
                 ProdutoDto dto = new()
                 {
-                    IdProduto = p.IdProduto,
+                    IdProduto = p.ProdutoId,
                     CodigoEAN = p.CodigoEAN,
                     TipoProduto = p.TipoProduto,
                     Descricao = p.Descricao,
