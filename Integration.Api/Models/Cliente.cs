@@ -2,8 +2,8 @@ namespace Integration.Api.Models
 {
     public class Cliente
     {
-        public int IdEmpresa { get; set; }
-        public int IdCliente { get; set; }
+        public int EmpresaId { get; set; }
+        public int ClienteId { get; set; }
         public string Nome { get; set; } = string.Empty;
         public string NomeFantasia { get; set; } = string.Empty;
         public string Endereco { get; set; } = string.Empty;

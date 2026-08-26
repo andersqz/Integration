@@ -7,7 +7,7 @@ namespace Integration.Api.Models
 {
     public class ProdutoFiscal
     {
-        public string IdProduto { get; set; } = string.Empty;     // PRD001 - FK
+        public string ProdutoId { get; set; } = string.Empty;     // PRD001 - FK
         public bool IcmsSubstituicaoCompra { get; set; }  // PRD013
         public bool IcmsSubstituicaoVenda { get; set; }   // PRD014
         public decimal PercentualIcmsSubstituicao { get; set; } // PRD015
