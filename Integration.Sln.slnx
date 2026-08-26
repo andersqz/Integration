@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="Integration.Api/Integration.Api.csproj" />
-  <Project Path="IntegrationClient.WinForms/IntegrationClient.WinForms.csproj" />
-</Solution>

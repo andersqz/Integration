@@ -18,8 +18,8 @@ namespace Integration.Api.Repositories
         {
             string query = @"
                 SELECT 
-                    EMPRESA AS IdEmpresa,
-                    CAST(PRD001 AS VARCHAR(50)) AS IdProduto,
+                    EMPRESA AS EmpresaId,
+                    CAST(PRD001 AS VARCHAR(50)) AS ProdutoId,
                     PRD005 AS CodigoEAN,
                     PRD007 AS TipoProduto,
                     PRD008 AS Descricao,

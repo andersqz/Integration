@@ -16,8 +16,8 @@ namespace Integration.Api.Repositories
         public async Task<Cliente?> SelecionarPorId(int id)
         {
             string query = @"SELECT
-                                EMPRESA AS IdEmpresa,
-                                CLI001 AS IdCliente,
+                                EMPRESA AS EmpresaId,
+                                CLI001 AS ClienteId,
                                 CLI002 AS Nome,
                                 CLI003 AS NomeFantasia,
                                 CLI004 AS Endereco,

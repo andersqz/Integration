@@ -34,7 +34,7 @@ VEN026 - PERC MAXIMO DESC*/
         public bool VendedorAtivo { get; set; }
         public string Endereco { get; set; } = string.Empty;
         public string CEP { get; set; } = string.Empty;
-        public string TipoPessoa { get; set; } = string.Empty;
+        public char TipoPessoa { get; set; }
         public string CpfCnpj { get; set; } = string.Empty;
         public string Telefone { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

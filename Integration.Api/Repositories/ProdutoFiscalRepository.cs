@@ -15,7 +15,7 @@ namespace Integration.Api.Repositories
         {
             string query = @"
                 SELECT 
-                    CAST(PRD001 AS VARCHAR(50)) AS IdProduto,
+                    CAST(PRD001 AS VARCHAR(50)) AS ProdutoId,
                     PRD013 AS IcmsSubstituicaoCompra,
                     PRD014 AS IcmsSubstituicaoVenda,
                     PRD015 AS PercentualIcmsSubstituicao,
