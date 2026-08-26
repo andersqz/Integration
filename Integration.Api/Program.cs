@@ -22,6 +22,7 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
 builder.Services.AddScoped<IProdutoFiscalRepository, ProdutoFiscalRepository>();
 
 builder.Services.AddScoped<IEmpresaRepository, EmpresaRepository>();
@@ -33,7 +34,6 @@ builder.Services.AddScoped<ILocalService, LocalService>();
 builder.Services.AddScoped<IVendedorRepository, VendedorRepository>();
 builder.Services.AddScoped<IVendedorService, VendedorService>();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

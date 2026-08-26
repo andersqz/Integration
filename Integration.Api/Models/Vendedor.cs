@@ -1,28 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
-
 namespace Integration.Api.Models
 {
-    /*GES_068 - VENDEDORES
---
-EMPRESA = EmpresaId
-VEN001 - VendedorId
-VEN002 - Nome
-VEN003 - Tipo (V, C, R)
-VEN004 - CalculaComissao?
-VEN005 - PercentualComissao
-VEN011 - VendedorAtivo?
-VEN013 - Endereco
-VEN014 - CEP
-VEN015 - PF OU PJ
-VEN016 - CPNJ/CPF
-VEN018 - TELEFONE
-VEN020 - EMAIL
-VEN025 - PERC MAXIMO COMISSAO
-VEN026 - PERC MAXIMO DESC*/
     public class Vendedor
     {
         public int EmpresaId { get; set; }
