@@ -10,14 +10,14 @@
         "projectUniqueName": "C:\\dev\\Integration\\Integration.Api\\Integration.Api.csproj",
         "projectName": "Integration.Api",
         "projectPath": "C:\\dev\\Integration\\Integration.Api\\Integration.Api.csproj",
-        "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\anderson\\.nuget\\packages\\",
         "outputPath": "C:\\dev\\Integration\\Integration.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\anderson\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
