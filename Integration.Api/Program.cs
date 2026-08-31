@@ -34,6 +34,9 @@ builder.Services.AddScoped<ILocalService, LocalService>();
 builder.Services.AddScoped<IVendedorRepository, VendedorRepository>();
 builder.Services.AddScoped<IVendedorService, VendedorService>();
 
+builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+builder.Services.AddScoped<IFornecedorService, FornecedorService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -1,18 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Integration.Api.Models
-{/*GES_042 - Cad. Fornecedor
--- 
-Empresa - EmpresaId
-FOR001 - FornecedorId
-FOR002 - NomeFornecedor
-FOR007 - CNPJ/CPF]
-FOR008 - IE
-FOR009 - TELEFONE
-FOR011 - EMAIL
-*/
-    public class Fornecedor
+namespace Integration.Api.Dtos
+{
+    public class FornecedorDto
     {
-        public int EmpresaId { get; set; }
+                public int EmpresaId { get; set; }
         public int FornecedorId { get; set; }
         public string Nome { get; set; }
         public string CpfCnpj { get; set; }

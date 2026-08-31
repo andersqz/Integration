@@ -28,7 +28,7 @@ IPC016 - ValorAcresimo
         public int EmpresaId { get; set; }
         public int LocalId { get; set; }
         public string Serie { get; set; }
-        public DateTime DataEmissao { get; set; }
+        public int DataEmissao { get; set; }
         public int NumeroPedido { get; set; }
         public int ProdutoId { get; set; }
         public int NumeroSequencia { get; set; }
