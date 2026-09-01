@@ -37,6 +37,9 @@ builder.Services.AddScoped<IVendedorService, VendedorService>();
 builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 builder.Services.AddScoped<IFornecedorService, FornecedorService>();
 
+builder.Services.AddScoped<IOperacaoFiscalRepository, OperacaoFiscalRepository>();
+builder.Services.AddScoped<IOperacaoFiscalService, OperacaoFiscalService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
