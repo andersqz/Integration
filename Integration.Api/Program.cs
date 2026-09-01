@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Integration.Api.Data;
 using Integration.Api.Interfaces;
 using Integration.Api.Repositories;
@@ -39,6 +40,9 @@ builder.Services.AddScoped<IFornecedorService, FornecedorService>();
 
 builder.Services.AddScoped<IOperacaoFiscalRepository, OperacaoFiscalRepository>();
 builder.Services.AddScoped<IOperacaoFiscalService, OperacaoFiscalService>();
+
+builder.Services.AddScoped<ISerieFiscalRepository, SerieFiscalRepository>();
+builder.Services.AddScoped<ISerieFiscalService, SerieFiscalService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
