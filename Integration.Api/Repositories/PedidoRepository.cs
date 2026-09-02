@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Dapper;
 using Integration.Api.Data;
 using Integration.Api.Interfaces;
@@ -31,7 +27,7 @@ namespace Integration.Api.Repositories
                                 NPC081 AS EnderecoCliente,
                                 NPC082 AS CepCliente,
                                 NPC083 AS CidadeCliente,
-                                NPC084 AS UfCliente,
+                                NPC084 AS UF,
                                 NPC085 AS CpfCnpj,
                                 NPC086 AS InscricaoEstadual,
                                 NPC087 AS TipoPessoa,
