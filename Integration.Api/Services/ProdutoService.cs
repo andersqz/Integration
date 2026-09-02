@@ -87,7 +87,6 @@ namespace Integration.Api.Services
 
                 responses.Add(dto);
             }
-
             return responses;
         }
     }
