@@ -31,7 +31,7 @@ NPC089 - FoneCliente*/
         public int LocalId { get; set; }
         public string Serie { get; set; } = string.Empty;
         public int DataEmissao { get; set; }
-        public int NumeroPedido { get; set; }
+        public int Documento { get; set; }
         public int ClienteId { get; set; }
         public int VendedorId { get; set; }
         public int OperacaoFiscal { get; set; }
