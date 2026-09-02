@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Integration.Api.Utils
 {
@@ -13,5 +9,13 @@ namespace Integration.Api.Utils
                 new DateTime(1800, 12, 28).AddDays(valor)
             );
         }
+
+        public static int ConverterDataParaInt(DateOnly data)
+        {
+            var dataBase = new DateOnly(1800, 12, 28);
+
+            return data.DayNumber - dataBase.DayNumber;
+        }
+
     }
 }
