@@ -9,6 +9,6 @@ namespace Integration.Api.Interfaces
     public interface IPedidoRepository
     {
         Task<IEnumerable<Pedido>> SelecionarTodos();
-        Task<Pedido?> SelecionarPorInfo(int local, string serie, DateOnly data, int doc);
+        Task<Pedido?> SelecionarPorInfo(int local, string serie, int data, int doc);
     }
 }

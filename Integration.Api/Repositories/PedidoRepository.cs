@@ -11,7 +11,7 @@ namespace Integration.Api.Repositories
         public PedidoRepository(IDbConnectionFactory connection)
             => _connection = connection;
 
-        public async Task<Pedido?> SelecionarPorInfo(int local, string serie, DateOnly data, int doc)
+        public async Task<Pedido?> SelecionarPorInfo(int local, string serie, int data, int doc)
         {
             string query = @"SELECT
                                 EMPRESA AS EmpresaId,
