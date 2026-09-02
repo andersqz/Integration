@@ -12,7 +12,7 @@ namespace Integration.Api.Controllers
     [Route("api/seriefiscal")]
     public class SerieFiscalController : ControllerBase
     {
-        private readonly ISerieFiscalService _service;
+        private readonly ISerieFiscalService _service;  
         public SerieFiscalController(ISerieFiscalService service)
             => _service = service;
 
