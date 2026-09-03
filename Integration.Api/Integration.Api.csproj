@@ -12,4 +12,10 @@
     <PackageReference Include="System.Data.Odbc" Version="10.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Integration.Application\Integration.Application.csproj" />
+    <ProjectReference Include="..\Integration.Domain\Integration.Domain.csproj" />
+    <ProjectReference Include="..\Integration.Infra\Integration.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

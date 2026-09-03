@@ -1,8 +1,9 @@
-using System.Runtime.InteropServices;
-using Integration.Api.Data;
-using Integration.Api.Interfaces;
-using Integration.Api.Repositories;
-using Integration.Api.Services;
+
+using Integration.Application.Interfaces;
+using Integration.Application.Services;
+using Integration.Infra.Data;
+using Integration.Infra.Repositories;
+using Integration.Domain.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

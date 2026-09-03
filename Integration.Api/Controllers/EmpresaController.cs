@@ -1,9 +1,9 @@
 
-using Integration.Api.Dtos;
-using Integration.Api.Exceptions;
-using Integration.Api.Interfaces;
 
+using Integration.Application.Dtos;
+using Integration.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using ntegration.Domain.Exceptions;
 
 namespace Integration.Api.Controllers
 {
