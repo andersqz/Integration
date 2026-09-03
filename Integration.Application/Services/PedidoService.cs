@@ -21,11 +21,13 @@ namespace Integration.Application.Services
         public async Task<PedidoDetalhesDto> BuscarPorInfo(int local, string serie, DateOnly data, int doc)
         {
             int dataConvert = Util.ConverterDataParaInt(data);
-            Pedido? p1 = await _repository.SelecionarPorInfo(local, serie, dataConvert, doc);
-            IEnumerable<PedidoItem> p2 = await _itemRepository.SelecionarPorInfo(local, serie, dataConvert, doc);
 
+            Pedido? p1 = await _repository.SelecionarPorInfo(local, serie, dataConvert, doc);
+            
             if (p1 is null)
                 throw new NotFoundException("Pedido não localizado.");
+
+            IEnumerable<PedidoItem> p2 = await _itemRepository.SelecionarPorInfo(local, serie, dataConvert, doc);
 
             return MapToResponseDetalhes(p1, p2);
         }
@@ -64,6 +66,13 @@ namespace Integration.Application.Services
 
         public PedidoDetalhesDto MapToResponseDetalhes(Pedido p, IEnumerable<PedidoItem> p2)
         {
+            List<PedidoItemDto> itensDto = new();
+
+            foreach (PedidoItem item in p2)
+            {
+                itensDto.Add(MapToItem(item));
+            }
+
             return new PedidoDetalhesDto()
             {
                 EmpresaId = p.EmpresaId,
@@ -85,13 +94,14 @@ namespace Integration.Application.Services
                 TipoPessoa = p.TipoPessoa,
                 Telefone = p.Telefone,
                 TransportadoraId = p.TransportadoraId,
-                Itens = p2.Select(MapToItem).ToList()
+                Itens = itensDto
             };
         }
 
         public PedidoItemDto MapToItem(PedidoItem item)
         {
             return new PedidoItemDto() {
+                ProdutoId = item.ProdutoId,
                 NumeroSequencia = item.SequenciaItem,
                 TipoProduto = item.TipoProduto,
                 Quantidade = item.Quantidade,
