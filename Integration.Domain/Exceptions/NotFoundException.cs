@@ -1,5 +1,5 @@
 
-namespace ntegration.Domain.Exceptions
+namespace Integration.Domain.Exceptions
 {
     public class NotFoundException : Exception
     {

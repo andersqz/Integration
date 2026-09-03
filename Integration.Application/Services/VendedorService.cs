@@ -2,7 +2,7 @@ using Integration.Application.Dtos;
 using Integration.Application.Interfaces;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
-using ntegration.Domain.Exceptions;
+using Integration.Domain.Exceptions;
 
 namespace Integration.Application.Services
 {
@@ -18,7 +18,43 @@ namespace Integration.Application.Services
 
             if (v is null)
                 throw new NotFoundException($"Vendedor de id {id} não encontrado");
-            
+
+            return MapToResponseDetalhes(v);
+        }
+
+
+
+        public async Task<IEnumerable<VendedorDto>> BuscarTodos()
+        {
+            IEnumerable<Vendedor> vendedores = await _repository.SelecionarTodos();
+            List<VendedorDto> responses = new();
+
+            foreach (Vendedor v in vendedores)
+            {
+                responses.Add(MapToResponse(v));
+            }
+
+            return responses;
+        }
+
+
+        public VendedorDto MapToResponse(Vendedor v)
+        {
+            return new VendedorDto()
+            {
+                VendedorId = v.VendedorId,
+                Nome = v.Nome,
+                Tipo = v.Tipo,
+                VendedorAtivo = v.VendedorAtivo,
+                CpfCnpj = v.CpfCnpj,
+                Telefone = v.Telefone
+            };
+        }
+
+
+
+        public VendedorDetalhesDto MapToResponseDetalhes(Vendedor v)
+        {
             return new VendedorDetalhesDto()
             {
                 EmpresaId = v.EmpresaId,
@@ -37,27 +73,6 @@ namespace Integration.Application.Services
                 PercMaximoComissao = v.PercMaximoComissao,
                 PercMaximoDesc = v.PercMaximoDesc
             };
-        }
-
-        public async Task<IEnumerable<VendedorDto>> BuscarTodos()
-        {
-            IEnumerable<Vendedor> vendedores = await _repository.SelecionarTodos();
-            List<VendedorDto> responses = new();
-
-            foreach (Vendedor v in vendedores)
-            {
-                responses.Add(new VendedorDto()
-                {
-                    VendedorId = v.VendedorId,
-                    Nome = v.Nome,
-                    Tipo = v.Tipo,
-                    VendedorAtivo = v.VendedorAtivo,
-                    CpfCnpj = v.CpfCnpj,
-                    Telefone = v.Telefone
-                });
-            }
-
-            return responses;
         }
     }
 }

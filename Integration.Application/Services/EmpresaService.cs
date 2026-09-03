@@ -4,7 +4,7 @@ using Integration.Application.Dtos;
 using Integration.Application.Interfaces;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
-using ntegration.Domain.Exceptions;
+using Integration.Domain.Exceptions;
 
 namespace Integration.Application.Services
 {
@@ -21,16 +21,9 @@ namespace Integration.Application.Services
             if (e is null)
                 throw new NotFoundException($"Empresa {id} não encontrada.");
 
-            EmpresaDto dto = new EmpresaDto()
-            {
-                CodigoEmpresa = e.CodigoEmpresa,
-                NomeEmpresa = e.NomeEmpresa,
-                TipoEmpresa = e.TipoEmpresa,
-                NomeFantasia = e.NomeFantasia
-            };
-
-            return dto;
+            return MapToResponse(e);
         }
+
 
         public async Task<IEnumerable<EmpresaDto>> BuscarTodos()
         {
@@ -39,15 +32,21 @@ namespace Integration.Application.Services
 
             foreach (Empresa e in empresas)
             {
-                responses.Add(new EmpresaDto()
-                {
-                    CodigoEmpresa = e.CodigoEmpresa,
-                    NomeEmpresa = e.NomeEmpresa,
-                    TipoEmpresa = e.TipoEmpresa,
-                    NomeFantasia = e.NomeFantasia
-                });
+                responses.Add(MapToResponse(e));
             }
             return responses;
+        }
+
+
+        public EmpresaDto MapToResponse(Empresa e)
+        {
+            return new EmpresaDto()
+            {
+                CodigoEmpresa = e.CodigoEmpresa,
+                NomeEmpresa = e.NomeEmpresa,
+                TipoEmpresa = e.TipoEmpresa,
+                NomeFantasia = e.NomeFantasia
+            };
         }
     }
 }
