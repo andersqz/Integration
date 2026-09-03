@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Integration.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/pedido")]
     public class PedidoController : ControllerBase
     {
         private readonly IPedidoService _service;
