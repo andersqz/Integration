@@ -47,8 +47,8 @@ namespace Integration.Infra.Repositories
                 SET ROWCOUNT 100;
 
                 SELECT
-                    EMPRESA AS IdEmpresa,
-                    CLI001 AS IdCliente,
+                    EMPRESA AS EmpresaId,
+                    CLI001 AS EmpresaId,
                     CLI002 AS Nome,
                     CLI003 AS NomeFantasia,
                     CLI004 AS Endereco,

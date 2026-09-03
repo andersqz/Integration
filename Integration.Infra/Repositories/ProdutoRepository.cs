@@ -13,7 +13,7 @@ namespace Integration.Infra.Repositories
         public ProdutoRepository(IDbConnectionFactory connection)
             => _connection = connection;
 
-        public async Task<Produto?> SelecionarPorId(int id)
+        public async Task<Produto?> SelecionarPorId(string id)
         {
             string query = @"
                 SELECT 
@@ -49,8 +49,8 @@ namespace Integration.Infra.Repositories
                 SET ROWCOUNT 100;
 
                 SELECT 
-                    EMPRESA AS IdEmpresa,
-                    CAST(PRD001 AS VARCHAR(50)) AS IdProduto,
+                    EMPRESA AS EmpresaId,
+                    CAST(PRD001 AS VARCHAR(50)) AS ProdutoId,
                     PRD005 AS CodigoEAN,
                     PRD007 AS TipoProduto,
                     PRD008 AS Descricao,

@@ -13,7 +13,7 @@ namespace Integration.Infra.Repositories
         public ProdutoFiscalRepository(IDbConnectionFactory connection)
             => _connection = connection;
 
-        public async Task<ProdutoFiscal?> SelecionarPorId(int id)
+        public async Task<ProdutoFiscal?> SelecionarPorId(string id)
         {
             string query = @"
                 SELECT 

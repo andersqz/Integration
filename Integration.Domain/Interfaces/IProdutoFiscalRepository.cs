@@ -5,6 +5,6 @@ namespace Integration.Domain.Interfaces
 {
     public interface IProdutoFiscalRepository
     {
-        Task<ProdutoFiscal?> SelecionarPorId(int id);
+        Task<ProdutoFiscal?> SelecionarPorId(string id);
     }
 }

@@ -68,7 +68,7 @@ namespace Integration.Infra.Repositories
                                 NPC081 AS EnderecoCliente,
                                 NPC082 AS CepCliente,
                                 NPC083 AS CidadeCliente,
-                                NPC084 AS UfCliente,
+                                NPC084 AS UF,
                                 NPC085 AS CpfCnpj,
                                 NPC086 AS InscricaoEstadual,
                                 NPC087 AS TipoPessoa,
