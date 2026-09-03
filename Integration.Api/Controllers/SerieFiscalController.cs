@@ -1,7 +1,7 @@
 
 using Integration.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using ntegration.Domain.Exceptions;
+using Integration.Domain.Exceptions;
 
 namespace Integration.Api.Controllers
 {
