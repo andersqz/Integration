@@ -47,6 +47,10 @@ builder.Services.AddScoped<ISerieFiscalService, SerieFiscalService>();
 builder.Services.AddScoped<ITransportadoraRepository, TransportadoraRepository>();
 builder.Services.AddScoped<ITransportadoraService, TransportadoraService>();
 
+builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+builder.Services.AddScoped<IPedidoItemRepository, PedidoItemRepository>();
+builder.Services.AddScoped<IPedidoService, PedidoService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

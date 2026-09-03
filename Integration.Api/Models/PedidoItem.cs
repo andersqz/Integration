@@ -24,9 +24,9 @@ IPC016 - ValorAcresimo
         public int LocalId { get; set; }
         public string Serie { get; set; }
         public int DataEmissao { get; set; }
-        public int NumeroPedido { get; set; }
-        public int ProdutoId { get; set; }
-        public int NumeroSequencia { get; set; }
+        public int Documento { get; set; }
+        public string ProdutoId { get; set; }
+        public int SequenciaItem { get; set; }
         public int TipoProduto { get; set; }
         public int Quantidade { get; set; }
         public decimal PrecoUnitario { get; set; }
