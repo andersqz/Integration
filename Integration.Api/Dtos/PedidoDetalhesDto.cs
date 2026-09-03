@@ -24,16 +24,7 @@ namespace Integration.Api.Dtos
         public string Telefone { get; set; }
         public int TransportadoraId { get; set; }
 
-
-        // itens
-        public int ProdutoId { get; set; }
-        public int NumeroSequencia { get; set; }
-        public int TipoProduto { get; set; }
-        public int Quantidade { get; set; }
-        public decimal PrecoUnitario { get; set; }
-        public double PercDesconto { get; set; }
-        public decimal ValorDesconto { get; set; }
-        public double PercAcrescimo { get; set; }
-        public decimal ValorAcrescimo { get; set; }
+        public List<PedidoItemDto> Itens {get;set;} = new();
+        
     }
 }

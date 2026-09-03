@@ -40,7 +40,7 @@ namespace Integration.Api.Repositories
                             AND
                                 NPC002 = ?
                             AND 
-                                NPC003 = ?,
+                                NPC003 = ?
                             AND 
                                 NPC004 = ?";
             
