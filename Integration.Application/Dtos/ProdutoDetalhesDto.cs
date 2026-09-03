@@ -2,8 +2,8 @@ namespace Integration.Application.Dtos
 {
     public class ProdutoDetalhesDto
     {
-        public int IdEmpresa { get; set; }
-        public string IdProduto { get; set; } = string.Empty;
+        public int EmpresaId { get; set; }
+        public string ProdutoId { get; set; } = string.Empty;
         public string CodigoEAN { get; set; } = string.Empty;
         public int TipoProduto { get; set; }
         public string Descricao { get; set; } = string.Empty;

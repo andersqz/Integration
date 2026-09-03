@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "axq2jJQvIaY=",
+  "dgSpecHash": "H+/W3rOHgZo=",
   "success": true,
   "projectFilePath": "C:\\dev\\Integration\\Integration.Api\\Integration.Api.csproj",
   "expectedPackageFiles": [
@@ -11,7 +11,8 @@
     "C:\\Users\\alexa\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\alexa\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
     "C:\\Users\\alexa\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.6.2\\swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
-    "C:\\Users\\alexa\\.nuget\\packages\\system.data.odbc\\10.0.11\\system.data.odbc.10.0.11.nupkg.sha512"
+    "C:\\Users\\alexa\\.nuget\\packages\\system.data.odbc\\8.0.0\\system.data.odbc.8.0.0.nupkg.sha512",
+    "C:\\Users\\alexa\\.nuget\\packages\\system.text.encoding.codepages\\8.0.0\\system.text.encoding.codepages.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

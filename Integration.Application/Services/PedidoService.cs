@@ -18,16 +18,16 @@ namespace Integration.Application.Services
             _itemRepository = itemRepository;
         }
 
-        public async Task<PedidoDetalhesDto> BuscarPorInfo(int local, string serie, DateOnly data, int doc)
+        public async Task<PedidoDetalhesDto> BuscarPorInfo(int empresa, int local, string serie, DateOnly data, int doc)
         {
             int dataConvert = Util.ConverterDataParaInt(data);
 
-            Pedido? p1 = await _repository.SelecionarPorInfo(local, serie, dataConvert, doc);
+            Pedido? p1 = await _repository.SelecionarPorInfo(empresa, local, serie, dataConvert, doc);
             
             if (p1 is null)
                 throw new NotFoundException("Pedido não localizado.");
 
-            IEnumerable<PedidoItem> p2 = await _itemRepository.SelecionarPorInfo(local, serie, dataConvert, doc);
+            IEnumerable<PedidoItem> p2 = await _itemRepository.SelecionarPorInfo(empresa, local, serie, dataConvert, doc);
 
             return MapToResponseDetalhes(p1, p2);
         }

@@ -59,8 +59,8 @@ namespace Integration.Application.Services
         {
             return new ClienteDetalhesDto()
             {
-                IdEmpresa = cliente.EmpresaId,
-                IdCliente = cliente.ClienteId,
+                EmpresaId = cliente.EmpresaId,
+                ClienteId = cliente.ClienteId,
                 Nome = cliente.Nome,
                 NomeFantasia = cliente.NomeFantasia,
                 Endereco = cliente.Endereco,
@@ -86,7 +86,7 @@ namespace Integration.Application.Services
         {
             return new ClienteDto()
             {
-                IdCliente = c.ClienteId,
+                ClienteId = c.ClienteId,
                 Nome = c.Nome,
                 CpfCnpj = c.CpfCnpj,
                 Telefone = c.Telefone,

@@ -50,7 +50,7 @@ namespace Integration.Application.Services
         {
             return new ProdutoDto()
             {
-                IdProduto = p.ProdutoId,
+                ProdutoId = p.ProdutoId,
                 CodigoEAN = p.CodigoEAN,
                 TipoProduto = p.TipoProduto,
                 Descricao = p.Descricao,
@@ -63,8 +63,8 @@ namespace Integration.Application.Services
         {
             return new ProdutoDetalhesDto()
             {
-                IdEmpresa = p.EmpresaId,
-                IdProduto = p.ProdutoId,
+                EmpresaId = p.EmpresaId,
+                ProdutoId = p.ProdutoId,
                 CodigoEAN = p.CodigoEAN,
                 TipoProduto = p.TipoProduto,
                 Descricao = p.Descricao,
