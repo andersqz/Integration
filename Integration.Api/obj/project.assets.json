@@ -127,6 +127,45 @@
             "rid": "win"
           }
         }
+      },
+      "Integration.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Integration.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Integration.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Integration.Application.dll": {}
+        }
+      },
+      "Integration.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Integration.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Integration.Domain.dll": {}
+        }
+      },
+      "Integration.Infra/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Dapper": "2.1.79",
+          "Integration.Application": "1.0.0",
+          "Integration.Domain": "1.0.0",
+          "System.Data.Odbc": "10.0.11"
+        },
+        "compile": {
+          "bin/placeholder/Integration.Infra.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Integration.Infra.dll": {}
+        }
       }
     }
   },
@@ -540,17 +579,35 @@
         "system.data.odbc.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Integration.Application/1.0.0": {
+      "type": "project",
+      "path": "../Integration.Application/Integration.Application.csproj",
+      "msbuildProject": "../Integration.Application/Integration.Application.csproj"
+    },
+    "Integration.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Integration.Domain/Integration.Domain.csproj",
+      "msbuildProject": "../Integration.Domain/Integration.Domain.csproj"
+    },
+    "Integration.Infra/1.0.0": {
+      "type": "project",
+      "path": "../Integration.Infra/Integration.Infra.csproj",
+      "msbuildProject": "../Integration.Infra/Integration.Infra.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Dapper >= 2.1.79",
+      "Integration.Application >= 1.0.0",
+      "Integration.Domain >= 1.0.0",
+      "Integration.Infra >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2",
       "System.Data.Odbc >= 10.0.11"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\anderson\\.nuget\\packages\\": {},
+    "C:\\Users\\alexa\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -559,14 +616,14 @@
       "projectUniqueName": "C:\\dev\\Integration\\Integration.Api\\Integration.Api.csproj",
       "projectName": "Integration.Api",
       "projectPath": "C:\\dev\\Integration\\Integration.Api\\Integration.Api.csproj",
-      "packagesPath": "C:\\Users\\anderson\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
       "outputPath": "C:\\dev\\Integration\\Integration.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\anderson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -581,7 +638,17 @@
         "net8.0": {
           "framework": "net8.0",
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\dev\\Integration\\Integration.Application\\Integration.Application.csproj": {
+              "projectPath": "C:\\dev\\Integration\\Integration.Application\\Integration.Application.csproj"
+            },
+            "C:\\dev\\Integration\\Integration.Domain\\Integration.Domain.csproj": {
+              "projectPath": "C:\\dev\\Integration\\Integration.Domain\\Integration.Domain.csproj"
+            },
+            "C:\\dev\\Integration\\Integration.Infra\\Integration.Infra.csproj": {
+              "projectPath": "C:\\dev\\Integration\\Integration.Infra\\Integration.Infra.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
