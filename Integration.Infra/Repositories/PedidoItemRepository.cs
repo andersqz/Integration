@@ -22,7 +22,7 @@ namespace Integration.Infra.Repositories
                                 IPC004 AS Documento,
                                 IPC005 AS ProdutoId,
                                 IPC006 AS SequenciaItem,
-                                IPC007 AS TipoItem,
+                                IPC007 AS TipoProduto,
                                 IPC010 AS Quantidade,
                                 IPC011 AS PrecoUnitario,
                                 IPC013 AS PercDesconto,

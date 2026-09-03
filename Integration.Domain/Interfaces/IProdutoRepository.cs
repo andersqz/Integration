@@ -6,6 +6,6 @@ namespace Integration.Domain.Interfaces
     public interface IProdutoRepository
     {
         Task<IEnumerable<Produto>> SelecionarTodos();
-        Task<Produto?> SelecionarPorId(int id);
+        Task<Produto?> SelecionarPorId(string id);
     }
 }

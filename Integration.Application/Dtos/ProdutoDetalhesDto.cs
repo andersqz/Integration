@@ -18,8 +18,8 @@ namespace Integration.Application.Dtos
         public double PesoLiquido { get; set; }
         public bool ForaDeLinha { get; set; }
         public bool ControlaEstoque { get; set; }
-        public DateOnly DataAlteracao { get; set; }
-        public DateOnly DataCadastro { get; set; }
+        public DateOnly? DataAlteracao { get; set; }
+        public DateOnly? DataCadastro { get; set; }
         public bool DisponivelInternet { get; set; }
 
 

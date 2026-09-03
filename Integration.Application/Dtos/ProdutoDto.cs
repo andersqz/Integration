@@ -8,6 +8,6 @@ namespace Integration.Application.Dtos
         public int TipoProduto { get; set; }
         public string Descricao { get; set; } = string.Empty;
         public bool ForaDeLinha { get; set; }
-        public DateOnly DataAlteracao { get; set; }
+        public DateOnly? DataAlteracao { get; set; }
     }
 }

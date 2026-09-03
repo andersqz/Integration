@@ -5,6 +5,6 @@ namespace Integration.Application.Interfaces
     public interface IProdutoService
     {
         Task<List<ProdutoDto>> BuscarTodos();
-        Task<ProdutoDetalhesDto> BuscarPorId(int id);
+        Task<ProdutoDetalhesDto> BuscarPorId(string id);
     }
 }

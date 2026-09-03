@@ -20,7 +20,7 @@ namespace Integration.Application.Services
             _produtoFiscalRepository = fiscalRepository;
         }
 
-        public async Task<ProdutoDetalhesDto> BuscarPorId(int id)
+        public async Task<ProdutoDetalhesDto> BuscarPorId(string id)
         {
             Produto? p = await _produtoRepository.SelecionarPorId(id);
             ProdutoFiscal? f = await _produtoFiscalRepository.SelecionarPorId(id);

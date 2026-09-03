@@ -14,7 +14,7 @@ namespace Integration.Application.Dtos
         public string InscricaoEstadual { get; set; } = string.Empty;
         public string Telefone { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public DateOnly DataNascimento { get; set; }
+        public DateOnly? DataNascimento { get; set; }
         public string? Sexo { get; set; }
         public string Cidade { get; set; } = string.Empty;
     }

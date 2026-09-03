@@ -42,7 +42,7 @@ namespace Integration.Application.Services
               EmpresaId = serie.EmpresaId,
               LocalId = serie.LocalId,
               Serie = serie.Serie,
-              UltimoDocEmitido = Util.ConverterData(serie.UltimoDocEmitido)  
+              UltimoDocEmitido = Util.ConverterData(serie.UltimoDocEmitido)
             };
         }
     }
