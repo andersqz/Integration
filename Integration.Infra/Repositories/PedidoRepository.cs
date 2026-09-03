@@ -13,7 +13,7 @@ namespace Integration.Infra.Repositories
         public PedidoRepository(IDbConnectionFactory connection)
             => _connection = connection;
 
-        public async Task<Pedido?> SelecionarPorInfo(int local, string serie, int data, int doc)
+        public async Task<Pedido?> SelecionarPorInfo(int empresa, int local, string serie, int data, int doc)
         {
             string query = @"SELECT
                                 EMPRESA AS EmpresaId,
@@ -26,7 +26,7 @@ namespace Integration.Infra.Repositories
                                 NPC007 AS OperacaoFiscal,
                                 NPC011 AS UltimaAlteracao,
                                 NPC080 AS NomeCliente,
-                                NPC081 AS EnderecoCliente,
+                                Trim(NPC081) AS EnderecoCliente,
                                 NPC082 AS CepCliente,
                                 NPC083 AS CidadeCliente,
                                 NPC084 AS UF,
@@ -40,6 +40,8 @@ namespace Integration.Infra.Repositories
                             WHERE
                                 NPC001 = ?
                             AND
+                                EMPRESA = ?
+                            AND
                                 NPC002 = ?
                             AND 
                                 NPC003 = ?
@@ -47,7 +49,7 @@ namespace Integration.Infra.Repositories
                                 NPC004 = ?";
             
             using var connection = await _connection.CreateConnection();
-            return await connection.QuerySingleOrDefaultAsync<Pedido>(query, new {NPC001 = local, NPC002 = serie, NPC003 = data, NPC004 = doc});
+            return await connection.QuerySingleOrDefaultAsync<Pedido>(query, new {EMPRESA = empresa, NPC001 = local, NPC002 = serie, NPC003 = data, NPC004 = doc});
         }
 
         public async Task<IEnumerable<Pedido>> SelecionarTodos()

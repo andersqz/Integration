@@ -62,17 +62,9 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "dependencies": {
-            "Dapper": {
-              "target": "Package",
-              "version": "[2.1.79, )"
-            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
-            },
-            "System.Data.Odbc": {
-              "target": "Package",
-              "version": "[10.0.11, )"
             }
           },
           "imports": [
@@ -265,9 +257,6 @@
             "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\dev\\Integration\\Integration.Application\\Integration.Application.csproj": {
-                "projectPath": "C:\\dev\\Integration\\Integration.Application\\Integration.Application.csproj"
-              },
               "C:\\dev\\Integration\\Integration.Domain\\Integration.Domain.csproj": {
                 "projectPath": "C:\\dev\\Integration\\Integration.Domain\\Integration.Domain.csproj"
               }
@@ -297,7 +286,7 @@
             },
             "System.Data.Odbc": {
               "target": "Package",
-              "version": "[10.0.11, )"
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

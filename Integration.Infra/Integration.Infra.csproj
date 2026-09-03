@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Integration.Application\Integration.Application.csproj" />
     <ProjectReference Include="..\Integration.Domain\Integration.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.79" />
-    <PackageReference Include="System.Data.Odbc" Version="10.0.11" />
+    <PackageReference Include="System.Data.Odbc" Version="8.0" />
   </ItemGroup>
 
   <PropertyGroup>

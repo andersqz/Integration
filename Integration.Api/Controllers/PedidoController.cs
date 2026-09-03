@@ -1,6 +1,7 @@
 
 using Integration.Application.Dtos;
 using Integration.Application.Interfaces;
+using Integration.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Integration.Api.Controllers
@@ -20,15 +21,25 @@ namespace Integration.Api.Controllers
             return Ok(pedidos);
         }
 
-        [HttpGet("{local}/{serie}/{data}/{doc}")]
+        [HttpGet("{empresa}/{local}/{serie}/{data}/{doc}")]
         public async Task<ActionResult<PedidoDetalhesDto>> BuscarPorInfo(
+            int empresa,
             int local,
             string serie,
             DateOnly data,
             int doc)
         {
-            var pedido = await _service.BuscarPorInfo(local, serie, data, doc);
-            return Ok(pedido);
+
+            try
+            {
+                var pedido = await _service.BuscarPorInfo(empresa, local, serie, data, doc);
+                return Ok(pedido);
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
         }
     }
 }

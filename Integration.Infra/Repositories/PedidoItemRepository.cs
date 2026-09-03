@@ -12,7 +12,7 @@ namespace Integration.Infra.Repositories
         public PedidoItemRepository(IDbConnectionFactory connection)
             => _connection = connection;
 
-        public async Task<IEnumerable<PedidoItem>> SelecionarPorInfo(int local, string serie, int data, int doc)
+        public async Task<IEnumerable<PedidoItem>> SelecionarPorInfo(int empresa, int local, string serie, int data, int doc)
         {
             string query = @"SELECT
                                 EMPRESA AS EmpresaId,
@@ -32,12 +32,13 @@ namespace Integration.Infra.Repositories
                             FROM 
                                 GES_235
                             WHERE IPC001 = ?
+                            AND EMPRESA = ?
                             AND IPC002 = ?
                             AND IPC003 = ?
                             AND IPC004 = ?";
             
             using var connection = await _connection.CreateConnection();
-            return await connection.QueryAsync<PedidoItem>(query, new { IPC001 = local, IPC002 = serie, IPC003 = data, IPC004 = doc });
+            return await connection.QueryAsync<PedidoItem>(query, new { EMPRESA = empresa, IPC001 = local, IPC002 = serie, IPC003 = data, IPC004 = doc });
         }
     }
 }
