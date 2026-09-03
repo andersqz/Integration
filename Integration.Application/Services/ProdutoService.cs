@@ -5,7 +5,7 @@ using Integration.Application.Interfaces;
 using Integration.Application.Utils;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
-using ntegration.Domain.Exceptions;
+using Integration.Domain.Exceptions;
 
 namespace Integration.Application.Services
 {
@@ -28,7 +28,40 @@ namespace Integration.Application.Services
             if (p is null || f is null)
                 throw new NotFoundException($"Produto ID {id} não encontrado.");
 
-            ProdutoDetalhesDto dto = new()
+            return MapToResponseDetalhes(p, f);
+        }
+
+
+        public async Task<List<ProdutoDto>> BuscarTodos()
+        {
+            IEnumerable<Produto> produtos = await _produtoRepository.SelecionarTodos();
+            List<ProdutoDto> responses = new();
+
+            foreach (Produto p in produtos)
+            {
+                responses.Add(MapToResponse(p));
+            }
+            return responses;
+        }
+
+
+
+        public ProdutoDto MapToResponse(Produto p)
+        {
+            return new ProdutoDto()
+            {
+                IdProduto = p.ProdutoId,
+                CodigoEAN = p.CodigoEAN,
+                TipoProduto = p.TipoProduto,
+                Descricao = p.Descricao,
+                ForaDeLinha = p.ForaDeLinha,
+                DataAlteracao = Util.ConverterData(p.DataAlteracao)
+            };
+        }
+        
+        public ProdutoDetalhesDto MapToResponseDetalhes(Produto p, ProdutoFiscal f)
+        {
+            return new ProdutoDetalhesDto()
             {
                 IdEmpresa = p.EmpresaId,
                 IdProduto = p.ProdutoId,
@@ -62,30 +95,6 @@ namespace Integration.Application.Services
                 Cest = f.Cest,
                 PrecoPauta = f.PrecoPauta
             };
-
-            return dto;
-        }
-
-        public async Task<List<ProdutoDto>> BuscarTodos()
-        {
-            IEnumerable<Produto> produtos = await _produtoRepository.SelecionarTodos();
-            List<ProdutoDto> responses = new();
-
-            foreach (Produto p in produtos)
-            {
-                ProdutoDto dto = new()
-                {
-                    IdProduto = p.ProdutoId,
-                    CodigoEAN = p.CodigoEAN,
-                    TipoProduto = p.TipoProduto,
-                    Descricao = p.Descricao,
-                    ForaDeLinha = p.ForaDeLinha,
-                    DataAlteracao = Util.ConverterData(p.DataAlteracao)
-                };
-
-                responses.Add(dto);
-            }
-            return responses;
         }
     }
 }

@@ -4,7 +4,7 @@ using Integration.Application.Dtos;
 using Integration.Application.Interfaces;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
-using ntegration.Domain.Exceptions;
+using Integration.Domain.Exceptions;
 
 namespace Integration.Application.Services
 {
@@ -21,6 +21,25 @@ namespace Integration.Application.Services
             if (l is null)
                 throw new NotFoundException($"Local de id {id} não encontrado.");
 
+            return MapToResponse(l);
+        }
+
+
+        public async Task<IEnumerable<LocalDto>> BuscarTodos()
+        {
+            IEnumerable<Local> locais = await _repository.SelecionarTodos();
+            List<LocalDto> responses = new();
+
+            foreach (Local l in locais)
+            {
+                responses.Add(MapToResponse(l));
+            }
+
+            return responses;
+        }
+
+        public LocalDto MapToResponse(Local l)
+        {
             return new LocalDto()
             {
                 EmpresaId = l.EmpresaId,
@@ -35,32 +54,6 @@ namespace Integration.Application.Services
                 Telefone = l.Telefone,
                 Email = l.Email
             };
-        }
-
-        public async Task<IEnumerable<LocalDto>> BuscarTodos()
-        {
-            IEnumerable<Local> locais = await _repository.SelecionarTodos();
-            List<LocalDto> responses = new();
-
-            foreach (Local l in locais)
-            {
-                responses.Add(new LocalDto()
-                {
-                    EmpresaId = l.EmpresaId,
-                    LocalId = l.LocalId,
-                    Descricao = l.Descricao,
-                    CNPJ = l.CNPJ,
-                    InscricaoEstadual = l.InscricaoEstadual,
-                    Endereco = l.Endereco,
-                    Bairro = l.Bairro,
-                    CEP = l.CEP,
-                    UF = l.UF,
-                    Telefone = l.Telefone,
-                    Email = l.Email
-                });
-            }
-
-            return responses;
         }
     }
 }

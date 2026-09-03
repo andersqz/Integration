@@ -1,6 +1,6 @@
 
 
-namespace ntegration.Domain.Exceptions
+namespace Integration.Domain.Exceptions
 {
     public class RuleBusinessException : Exception
     {

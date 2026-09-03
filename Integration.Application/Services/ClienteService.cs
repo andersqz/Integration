@@ -4,7 +4,7 @@ using Integration.Application.Dtos;
 using Integration.Application.Interfaces;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
-using ntegration.Domain.Exceptions;
+using Integration.Domain.Exceptions;
 
 namespace Integration.Application.Services
 {
@@ -17,6 +17,12 @@ namespace Integration.Application.Services
             _repository = repository;
         }
 
+        /// <summary>
+        /// busca um cliente pelo id atraves do repository e retorna ele com detalhes
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>um cliente especifico</returns>
+        /// <exception cref="NotFoundException"></exception>
         public async Task<ClienteDetalhesDto> BuscarPorId(int id)
         {
             Cliente? cliente = await _repository.SelecionarPorId(id);
@@ -24,7 +30,34 @@ namespace Integration.Application.Services
             if (cliente is null)
                 throw new NotFoundException($"Cliente ID {id} não encontrado.");
 
-            ClienteDetalhesDto dto = new()
+            return MapToResponseDetalhes(cliente);
+        }
+
+
+        /// <summary>
+        /// busca todos clientes do banco atraves do repository e retorna ele resumido
+        /// </summary>
+        /// <returns>lista de clientes</returns>
+        public async Task<List<ClienteDto>> BuscarTodos()
+        {
+            IEnumerable<Cliente> clientes = await _repository.SelecionarTodos();
+            List<ClienteDto> responses = new();
+
+            foreach (Cliente c in clientes)
+            {
+                responses.Add(MapToResponse(c));
+            }
+            return responses;
+        }
+
+        /// <summary>
+        /// mapeia dados da entidade cliente para um dto de resposta com detalhes
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns>dto de resposta com detalhes do cliente</returns>
+        public ClienteDetalhesDto MapToResponseDetalhes(Cliente cliente)
+        {
+            return new ClienteDetalhesDto()
             {
                 IdEmpresa = cliente.EmpresaId,
                 IdCliente = cliente.ClienteId,
@@ -42,29 +75,23 @@ namespace Integration.Application.Services
                 Sexo = cliente.Sexo,
                 Cidade = cliente.Cidade
             };
-
-            return dto;
         }
 
-        public async Task<List<ClienteDto>> BuscarTodos()
+        /// <summary>
+        /// mapeia a entidade cliente do banco para um dto de resposta resumido
+        /// </summary>
+        /// <param name="c">entidade cliente</param>
+        /// <returns>dto resumido com info do cliente</returns>
+        public ClienteDto MapToResponse(Cliente c)
         {
-            IEnumerable<Cliente> clientes = await _repository.SelecionarTodos();
-            List<ClienteDto> responses = new();
-
-            foreach (Cliente c in clientes)
+            return new ClienteDto()
             {
-                ClienteDto dto = new()
-                {
-                    IdCliente = c.ClienteId,
-                    Nome = c.Nome,
-                    CpfCnpj = c.CpfCnpj,
-                    Telefone = c.Telefone,
-                    Email = c.Email
-                };
-
-                responses.Add(dto);
-            }
-            return responses;
+                IdCliente = c.ClienteId,
+                Nome = c.Nome,
+                CpfCnpj = c.CpfCnpj,
+                Telefone = c.Telefone,
+                Email = c.Email
+            };
         }
     }
 }

@@ -3,7 +3,7 @@ using Integration.Application.Interfaces;
 using Integration.Application.Utils;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
-using ntegration.Domain.Exceptions;
+using Integration.Domain.Exceptions;
 
 namespace Integration.Application.Services
 {
