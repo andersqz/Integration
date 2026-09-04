@@ -10,40 +10,34 @@ namespace Integration.Api.Controllers
     [Route("api/cliente")]
     public class ClienteController : ControllerBase
     {
+        private readonly ILogger<ClienteController> _logger;
         private readonly IClienteService _service;
-        public ClienteController(IClienteService service)
+        public ClienteController(IClienteService service, ILogger<ClienteController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                List<ClienteDto> clientes = await _service.BuscarTodos();
-                return Ok(clientes);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando todos os clientes");
 
+            List<ClienteDto> clientes = await _service.BuscarTodos();
+            return Ok(clientes);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                ClienteDetalhesDto? cliente = await _service.BuscarPorId(id);
-                return Ok(cliente);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando cliente com ID {id}", id);
 
+            ClienteDetalhesDto? cliente = await _service.BuscarPorId(id);
+
+            if (cliente is null) 
+                return NotFound();
+
+            return Ok(cliente);
         }
     }
 }
