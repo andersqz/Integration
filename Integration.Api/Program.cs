@@ -4,6 +4,7 @@ using Integration.Application.Services;
 using Integration.Infra.Data;
 using Integration.Infra.Repositories;
 using Integration.Domain.Interfaces;
+using Integration.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ var connectionString = builder.Configuration.GetConnectionString("Gestor")
 builder.Services.AddSingleton<IDbConnectionFactory>(
     new OdbcConnectionFactory(connectionString)
 );
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
@@ -63,6 +67,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

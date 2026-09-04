@@ -48,7 +48,7 @@ namespace Integration.Infra.Repositories
 
                 SELECT
                     EMPRESA AS EmpresaId,
-                    CLI001 AS EmpresaId,
+                    CLI001 AS ClienteId,
                     CLI002 AS Nome,
                     CLI003 AS NomeFantasia,
                     CLI004 AS Endereco,
