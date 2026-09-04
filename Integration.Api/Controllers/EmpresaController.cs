@@ -11,38 +11,36 @@ namespace Integration.Api.Controllers
     [Route("api/empresa")]
     public class EmpresaController : ControllerBase
     {
+        private readonly ILogger<ClienteController> _logger;
         private readonly IEmpresaService _service;
-        public EmpresaController(IEmpresaService service)
-            => _service = service;
+        public EmpresaController(IEmpresaService service, ILogger<ClienteController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        }
+            
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                IEnumerable<EmpresaDto> empresas = await _service.BuscarTodos();
-                return Ok(empresas);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando todas as empresas");
+            IEnumerable<EmpresaDto> empresas = await _service.BuscarTodos();
+            return Ok(empresas);
+            
         }
 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
-        {
-            try
-            {
-                EmpresaDto empresa = await _service.BuscarPorId(id);
-                return Ok(empresa);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+        {       
+            _logger.LogInformation("Buscando a empresa ID {id}", id);
             
+            EmpresaDto empresa = await _service.BuscarPorId(id);
+
+            if (empresa is null)
+                return NotFound();
+
+            return Ok(empresa); 
         }
     }
 }

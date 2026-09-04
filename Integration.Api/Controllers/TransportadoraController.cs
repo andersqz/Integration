@@ -10,13 +10,18 @@ namespace Integration.Api.Controllers
     [Route("api/transportadora")]
     public class TransportadoraController : ControllerBase
     {
+        private readonly ILogger<TransportadoraController> _logger;
         private readonly ITransportadoraService _service;
-        public TransportadoraController(ITransportadoraService service)
-            => _service = service;
+        public TransportadoraController(ITransportadoraService service, ILogger<TransportadoraController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            _logger.LogInformation("Buscando todas as Transportadoras.");
             IEnumerable<TransportadoraDto> tr = await _service.BuscarTodos();
             return Ok(tr);
         }
@@ -24,15 +29,14 @@ namespace Integration.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                TransportadoraDto tr = await _service.BuscarPorId(id);
-                return Ok(tr);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando a Transportadora ID {id}", id);
+
+            TransportadoraDto tr = await _service.BuscarPorId(id);
+
+            if (tr is null)
+                return NotFound();
+                
+            return Ok(tr);
         }
     }
 }

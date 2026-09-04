@@ -10,14 +10,18 @@ namespace Integration.Api.Controllers
     [Route("api/fornecedor")]
     public class FornecedorController : ControllerBase
     {
+        private readonly ILogger<FornecedorController> _logger;
         private readonly IFornecedorService _service;
-        public FornecedorController(IFornecedorService service)
-            => _service = service;
-
+        public FornecedorController(IFornecedorService service, ILogger<FornecedorController> logger)
+        {
+             _service = service;
+             _logger = logger;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            _logger.LogInformation("Buscando todos os fornecedores");
             IEnumerable<FornecedorDto> fornecedores = await _service.BuscarTodos();
             return Ok(fornecedores);
         }
@@ -25,15 +29,14 @@ namespace Integration.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                FornecedorDto fornecedor = await _service.BuscarPorId(id);
-                return Ok(fornecedor);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando o fornecedor ID {id}", id);
+
+            FornecedorDto fornecedor = await _service.BuscarPorId(id);
+            
+            if (fornecedor is null)
+                return NotFound();
+
+            return Ok(fornecedor);
         }
     }
 }

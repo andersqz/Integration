@@ -10,40 +10,33 @@ namespace Integration.Api.Controllers
     [Route("api/produto")]
     public class ProdutoController : ControllerBase
     {
+        private readonly ILogger<ProdutoController> _logger;
         private readonly IProdutoService _service;
-        public ProdutoController(IProdutoService service)
+        public ProdutoController(IProdutoService service, ILogger<ProdutoController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                List<ProdutoDto> produtos = await _service.BuscarTodos();
-                return Ok(produtos);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-
+            _logger.LogInformation("Buscando todos os Produtos.");
+            List<ProdutoDto> produtos = await _service.BuscarTodos();
+            return Ok(produtos);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            try
-            {
-                ProdutoDetalhesDto produto = await _service.BuscarPorId(id);
-                return Ok(produto);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando o Produto ID {id}", id);
 
+            ProdutoDetalhesDto produto = await _service.BuscarPorId(id);
+
+            if (produto is null)
+                return NotFound();
+
+            return Ok(produto);
         }
     }
 }
