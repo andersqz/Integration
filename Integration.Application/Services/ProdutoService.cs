@@ -25,7 +25,7 @@ namespace Integration.Application.Services
             Produto? p = await _produtoRepository.SelecionarPorId(id);
             ProdutoFiscal? f = await _produtoFiscalRepository.SelecionarPorId(id);
 
-            if (p is null || f is null)
+            if (p is null && f is null)
                 throw new NotFoundException($"Produto ID {id} não encontrado.");
 
             return MapToResponseDetalhes(p, f);

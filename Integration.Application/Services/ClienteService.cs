@@ -10,7 +10,6 @@ namespace Integration.Application.Services
 {
     public class ClienteService : IClienteService
     {
-
         private readonly IClienteRepository _repository;
         public ClienteService(IClienteRepository repository)
         {
