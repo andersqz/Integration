@@ -32,16 +32,18 @@ namespace Integration.Application.Services
         }
 
 
-        public async Task<List<ProdutoDto>> BuscarTodos()
+        public async Task<PaginacaoDto<ProdutoDto>> BuscarTodos(int pagina, int tamanhoPagina)
         {
-            IEnumerable<Produto> produtos = await _produtoRepository.SelecionarTodos();
-            List<ProdutoDto> responses = new();
+            IEnumerable<Produto> produtos = await _produtoRepository.SelecionarTodos(pagina, tamanhoPagina);
+            int total = await _produtoRepository.ContarTodos();
 
-            foreach (Produto p in produtos)
+            return new PaginacaoDto<ProdutoDto>
             {
-                responses.Add(MapToResponse(p));
-            }
-            return responses;
+                Itens = produtos.Select(MapToResponse),
+                PaginaAtual = pagina,
+                TamanhoPagina = tamanhoPagina,
+                TotalRegistros = total
+            };
         }
 
 
@@ -58,7 +60,7 @@ namespace Integration.Application.Services
                 DataAlteracao = Util.ConverterData(p.DataAlteracao)
             };
         }
-        
+
         public ProdutoDetalhesDto MapToResponseDetalhes(Produto p, ProdutoFiscal f)
         {
             return new ProdutoDetalhesDto()
