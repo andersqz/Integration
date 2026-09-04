@@ -4,7 +4,7 @@ namespace Integration.Application.Interfaces
 {
     public interface IProdutoService
     {
-        Task<List<ProdutoDto>> BuscarTodos();
+        Task<PaginacaoDto<ProdutoDto>> BuscarTodos(int pagina, int tamanhoPagina);
         Task<ProdutoDetalhesDto> BuscarPorId(string id);
     }
 }
