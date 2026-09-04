@@ -2,8 +2,8 @@
 
 using Integration.Application.Dtos;
 using Integration.Application.Interfaces;
+using Integration.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Integration.Domain.Exceptions;
 
 namespace Integration.Api.Controllers
 {
@@ -11,9 +11,9 @@ namespace Integration.Api.Controllers
     [Route("api/empresa")]
     public class EmpresaController : ControllerBase
     {
-        private readonly ILogger<ClienteController> _logger;
+        private readonly ILogger<EmpresaController> _logger;
         private readonly IEmpresaService _service;
-        public EmpresaController(IEmpresaService service, ILogger<ClienteController> logger)
+        public EmpresaController(IEmpresaService service, ILogger<EmpresaController> logger)
         {
             _service = service;
             _logger = logger;

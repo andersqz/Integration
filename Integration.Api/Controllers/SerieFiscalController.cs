@@ -24,7 +24,7 @@ namespace Integration.Api.Controllers
         {
             _logger.LogInformation("Buscando todas as Séries Fiscais.");
             IEnumerable<SerieFiscalDto> serie = await _service.BuscarTodos();
-            return Ok();
+            return Ok(serie);
         }
 
         [HttpGet("{serie}")]
@@ -37,7 +37,7 @@ namespace Integration.Api.Controllers
             if (serieFiscal is null)    
                 return NotFound();
 
-            return Ok();
+            return Ok(serieFiscal);
         }
     }
 }
