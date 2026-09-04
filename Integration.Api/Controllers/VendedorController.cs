@@ -10,36 +10,33 @@ namespace Integration.Api.Controllers
     [Route("api/vendedor")]
     public class VendedorController : ControllerBase
     {
+        private readonly ILogger<VendedorController> _logger;
         private readonly IVendedorService _service;
-        public VendedorController(IVendedorService service)
-            => _service = service;
+        public VendedorController(IVendedorService service, ILogger<VendedorController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        } 
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                IEnumerable<VendedorDto> vendedores = await _service.BuscarTodos();
-                return Ok(vendedores);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            } 
+            _logger.LogInformation("Busca todos os Vendedores.");
+            IEnumerable<VendedorDto> vendedores = await _service.BuscarTodos();
+            return Ok(vendedores);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                VendedorDetalhesDto vendedor = await _service.BuscarPorId(id);
-                return Ok(vendedor);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Busca o Vendedor ID {id}", id);
+
+            VendedorDetalhesDto vendedor = await _service.BuscarPorId(id);
+
+            if (vendedor is null)
+                return NotFound();
+                
+            return Ok(vendedor);
         }
     }
 }

@@ -2,6 +2,8 @@
 using Integration.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Integration.Domain.Exceptions;
+using Integration.Application.Dtos;
+using System.Data.Odbc;
 
 namespace Integration.Api.Controllers
 {
@@ -9,27 +11,33 @@ namespace Integration.Api.Controllers
     [Route("api/seriefiscal")]
     public class SerieFiscalController : ControllerBase
     {
+        private readonly ILogger<SerieFiscalController> _logger;
         private readonly ISerieFiscalService _service;  
-        public SerieFiscalController(ISerieFiscalService service)
-            => _service = service;
+        public SerieFiscalController(ISerieFiscalService service, ILogger<SerieFiscalController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _service.BuscarTodos());
+            _logger.LogInformation("Buscando todas as Séries Fiscais.");
+            IEnumerable<SerieFiscalDto> serie = await _service.BuscarTodos();
+            return Ok();
         }
 
         [HttpGet("{serie}")]
         public async Task<IActionResult> GetBySerie(string serie)
         {
-            try
-            {
-                return Ok(await _service.BuscarPorSerie(serie));
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando a Série Fiscal ID {id}", serie);
+
+            SerieFiscalDto serieFiscal = await _service.BuscarPorSerie(serie);
+
+            if (serieFiscal is null)    
+                return NotFound();
+
+            return Ok();
         }
     }
 }

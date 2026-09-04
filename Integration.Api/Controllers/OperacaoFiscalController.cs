@@ -9,14 +9,19 @@ namespace Integration.Api.Controllers
     [ApiController]
     [Route("api/operacaofiscal")]
     public class OperacaoFiscalController : ControllerBase
-    {
+    {   
+        private readonly ILogger<OperacaoFiscalController> _logger;
         private readonly IOperacaoFiscalService _service;
-        public OperacaoFiscalController(IOperacaoFiscalService service) 
-            => _service = service;
+        public OperacaoFiscalController(IOperacaoFiscalService service, ILogger<OperacaoFiscalController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        } 
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            _logger.LogInformation("Buscando todas as operações fiscais.");
             IEnumerable<OperacaoFiscalDto> op = await _service.BuscarTodos();
             return Ok(op);
         }
@@ -24,14 +29,14 @@ namespace Integration.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                return Ok(await _service.BuscarPorId(id));
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _logger.LogInformation("Buscando a Operaão Fiscal ID {id}", id);
+            
+            OperacaoFiscalDto? op = await _service.BuscarPorId(id);
+            
+            if (op is null)
+                return NotFound();
+
+            return Ok(op);
         }
     }
 }

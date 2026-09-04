@@ -10,36 +10,34 @@ namespace Integration.Api.Controllers
     [Route("api/pedido")]
     public class PedidoController : ControllerBase
     {
+        private readonly ILogger<PedidoController> _logger;
         private readonly IPedidoService _service;
-        public PedidoController(IPedidoService service)
-            => _service = service;
+        public PedidoController(IPedidoService service, ILogger<PedidoController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        } 
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            _logger.LogInformation("Buscando todos os Pedidos.");
             IEnumerable<PedidoCabecalhoDto> pedidos = await _service.BuscarTodos();
             return Ok(pedidos);
         }
 
         [HttpGet("{empresa}/{local}/{serie}/{data}/{doc}")]
         public async Task<ActionResult<PedidoDetalhesDto>> BuscarPorInfo(
-            int empresa,
-            int local,
-            string serie,
-            DateOnly data,
-            int doc)
+                        int empresa, int local, string serie, DateOnly data, int doc)
         {
+            _logger.LogInformation("Buscando o Pedido ID {id}", doc);
 
-            try
-            {
-                var pedido = await _service.BuscarPorInfo(empresa, local, serie, data, doc);
-                return Ok(pedido);
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var pedido = await _service.BuscarPorInfo(empresa, local, serie, data, doc);
 
+            if (pedido is null)
+                return NotFound();
+
+            return Ok(pedido);
         }
     }
 }
