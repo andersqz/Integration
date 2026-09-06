@@ -23,17 +23,18 @@ namespace Integration.Application.Services
             return MapToResponse(f);
         }
 
-        public async Task<IEnumerable<FornecedorDto>> BuscarTodos()
+        public async Task<PaginacaoDto<FornecedorDto>> BuscarTodos(int pagina, int tamanhoPagina)
         {
-            IEnumerable<Fornecedor> fornecedores = await _repository.SelecionarTodos();
-            List<FornecedorDto> responses = new();
+            IEnumerable<Fornecedor> fornecedores = await _repository.SelecionarTodos(pagina, tamanhoPagina);
+            int total = await _repository.ContarTodos();
 
-            foreach (Fornecedor f in fornecedores)
+            return new PaginacaoDto<FornecedorDto>()
             {
-                responses.Add(MapToResponse(f));
-            }
-
-            return responses;
+              Itens = fornecedores.Select(MapToResponse),
+              PaginaAtual = pagina,
+              TamanhoPagina = tamanhoPagina,
+              TotalRegistros = total  
+            };
         }
 
 
