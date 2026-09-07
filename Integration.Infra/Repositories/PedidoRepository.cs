@@ -47,16 +47,18 @@ namespace Integration.Infra.Repositories
                                 NPC003 = ?
                             AND 
                                 NPC004 = ?";
-            
+
             using var connection = await _connection.CreateConnection();
-            return await connection.QuerySingleOrDefaultAsync<Pedido>(query, new {EMPRESA = empresa, NPC001 = local, NPC002 = serie, NPC003 = data, NPC004 = doc});
+            return await connection.QuerySingleOrDefaultAsync<Pedido>(query, new { EMPRESA = empresa, NPC001 = local, NPC002 = serie, NPC003 = data, NPC004 = doc });
         }
 
-        public async Task<IEnumerable<Pedido>> SelecionarTodos()
+        public async Task<IEnumerable<Pedido>> SelecionarTodos(int pagina, int tamanhoPagina)
         {
+            int startAt = ((pagina - 1) * tamanhoPagina) + 1;
+
             string query = @"
-                            SET ROWCOUNT 10;
-                            SELECT
+                            
+                            SELECT TOP ? START AT ?
                                 EMPRESA AS EmpresaId,
                                 NPC001 AS LocalId,
                                 NPC002 AS Serie,
@@ -77,10 +79,20 @@ namespace Integration.Infra.Repositories
                                 NPC089 AS Telefone,
                                 NPC050 AS TransportadoraId
                             FROM
-                                GES_230";
+                                GES_230
+                            ORDER BY
+                                EMPRESA, NPC001, NPC002, NPC003, NPC004";
 
             using var connection = await _connection.CreateConnection();
-            return await connection.QueryAsync<Pedido>(query);
+            return await connection.QueryAsync<Pedido>(query, new { Top = tamanhoPagina, StartAt = startAt });
+        }
+
+        public async Task<int> ContarTodos()
+        {
+            string query = "SELECT COUNT(*) FROM GES_230";
+
+            using var connection = await _connection.CreateConnection();
+            return await connection.ExecuteScalarAsync<int>(query);
         }
     }
 }
