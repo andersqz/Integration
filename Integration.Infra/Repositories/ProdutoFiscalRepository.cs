@@ -34,7 +34,7 @@ namespace Integration.Infra.Repositories
                 WHERE 
                     CAST(PRD001 AS VARCHAR(50)) = ?";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<ProdutoFiscal>(query, new { Id = id.ToString() });
         }
     }

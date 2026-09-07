@@ -37,7 +37,7 @@ namespace Integration.Infra.Repositories
                             AND IPC003 = ?
                             AND IPC004 = ?";
             
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<PedidoItem>(query, new { EMPRESA = empresa, IPC001 = local, IPC002 = serie, IPC003 = data, IPC004 = doc });
         }
     }

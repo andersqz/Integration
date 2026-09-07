@@ -25,9 +25,15 @@ namespace Integration.Api.Controllers
         {
             _logger.LogInformation("Buscando Pedidos - página {Pagina}, tamanho {Tamanho}, incluirItens {IncluirItens}",
                     parametros.Pagina, parametros.TamanhoPagina, incluirItens);
+
+            if (incluirItens)
+            {
+                var pedidoComItens = await _service.BuscarTodosComItens(parametros.Pagina, parametros.TamanhoPagina, incluirItens);
+                return Ok(pedidoComItens);
+            }
                     
-            var pedidos = await _service.BuscarTodos(parametros.Pagina, parametros.TamanhoPagina, incluirItens);
-            return Ok(pedidos);
+            var pedidoSemItens = await _service.BuscarTodosSemItens(parametros.Pagina, parametros.TamanhoPagina);
+            return Ok(pedidoSemItens);
         }
 
         [HttpGet("{empresa}/{local}/{serie}/{data}/{doc}")]

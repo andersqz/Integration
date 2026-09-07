@@ -39,7 +39,7 @@ namespace Integration.Infra.Repositories
                         ORDER BY 
                             VendedorId";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryFirstOrDefaultAsync<Vendedor>(query, new { VendedorId = id });
         }
 
@@ -67,7 +67,7 @@ namespace Integration.Infra.Repositories
                         ORDER BY 
                             VendedorId";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Vendedor>(query);
         }
     }

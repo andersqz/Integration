@@ -48,7 +48,7 @@ namespace Integration.Infra.Repositories
                             AND 
                                 NPC004 = ?";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<Pedido>(query, new { EMPRESA = empresa, NPC001 = local, NPC002 = serie, NPC003 = data, NPC004 = doc });
         }
 
@@ -83,7 +83,7 @@ namespace Integration.Infra.Repositories
                             ORDER BY
                                 EMPRESA, NPC001, NPC002, NPC003, NPC004";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Pedido>(query, new { Top = tamanhoPagina, StartAt = startAt });
         }
 
@@ -91,7 +91,7 @@ namespace Integration.Infra.Repositories
         {
             string query = "SELECT COUNT(*) FROM GES_230";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.ExecuteScalarAsync<int>(query);
         }
     }

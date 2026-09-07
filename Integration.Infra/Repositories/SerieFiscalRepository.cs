@@ -23,7 +23,7 @@ namespace Integration.Infra.Repositories
                             WHERE 
                                 UPPER(SER002) = UPPER(?)";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<SerieFiscal>(query, new {Serie = serie});
         }
 
@@ -37,7 +37,7 @@ namespace Integration.Infra.Repositories
                             FROM
                                 GES_063";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<SerieFiscal>(query);
         }
     }

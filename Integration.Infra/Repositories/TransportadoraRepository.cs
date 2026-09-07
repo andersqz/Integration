@@ -29,7 +29,7 @@ namespace Integration.Infra.Repositories
                                 GES_074
                             WHERE 
                                 TRN001 = ?";
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<Transportadora>(query, new {Id = id});
         }
 
@@ -49,7 +49,7 @@ namespace Integration.Infra.Repositories
                             FROM
                                 GES_074";
             
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Transportadora>(query);
         }
     }
