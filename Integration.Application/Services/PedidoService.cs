@@ -32,18 +32,21 @@ namespace Integration.Application.Services
             return MapToResponseDetalhes(p1, p2);
         }
 
-        public async Task<PaginacaoDto<PedidoDetalhesDto>> BuscarTodos(int pagina, int tamanhoPagina)
+        public async Task<PaginacaoDto<PedidoDetalhesDto>> BuscarTodos(int pagina, int tamanhoPagina, bool incluirItens)
         {
 
             IEnumerable<Pedido> pedidos = await _repository.SelecionarTodos(pagina, tamanhoPagina);
             int total = await _repository.ContarTodos();
 
             List<PedidoDetalhesDto> detalhes = new();
+            IEnumerable<PedidoItem> itens;
 
             foreach (Pedido p in pedidos)
             {
-                IEnumerable<PedidoItem> itens = await _itemRepository.SelecionarPorInfo(
-                    p.EmpresaId, p.LocalId, p.Serie, p.DataEmissao, p.Documento);
+                if (incluirItens)
+                    itens = await _itemRepository.SelecionarPorInfo(p.EmpresaId, p.LocalId, p.Serie, p.DataEmissao, p.Documento);
+                else    
+                    itens = Enumerable.Empty<PedidoItem>();
 
                 detalhes.Add(MapToResponseDetalhes(p, itens));
             }
