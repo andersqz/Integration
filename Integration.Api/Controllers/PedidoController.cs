@@ -19,10 +19,14 @@ namespace Integration.Api.Controllers
         } 
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] ParametrosPaginacaoDto parametros)
+        public async Task<IActionResult> Get(
+            [FromQuery] ParametrosPaginacaoDto parametros,
+            [FromQuery] bool incluirItens = false)
         {
-            _logger.LogInformation("Buscando Pedidos");
-            var pedidos = await _service.BuscarTodos(parametros.Pagina, parametros.TamanhoPagina);
+            _logger.LogInformation("Buscando Pedidos - página {Pagina}, tamanho {Tamanho}, incluirItens {IncluirItens}",
+                    parametros.Pagina, parametros.TamanhoPagina, incluirItens);
+                    
+            var pedidos = await _service.BuscarTodos(parametros.Pagina, parametros.TamanhoPagina, incluirItens);
             return Ok(pedidos);
         }
 
