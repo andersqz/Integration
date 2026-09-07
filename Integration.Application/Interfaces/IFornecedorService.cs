@@ -4,7 +4,7 @@ namespace Integration.Application.Interfaces
 {
     public interface IFornecedorService
     {
-        Task<IEnumerable<FornecedorDto>> BuscarTodos();
+        Task<PaginacaoDto<FornecedorDto>> BuscarTodos(int pagina, int tamanhoPagina);
         Task<FornecedorDto> BuscarPorId(int id);
     }
 }

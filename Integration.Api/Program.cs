@@ -16,7 +16,7 @@ var connectionString = builder.Configuration.GetConnectionString("Gestor")
     ?? throw new InvalidOperationException(
         "Connection string 'Gestor' não foi configurada.");
 
-builder.Services.AddSingleton<IDbConnectionFactory>(
+builder.Services.AddScoped<IDbConnectionFactory>(sp =>
     new OdbcConnectionFactory(connectionString)
 );
 

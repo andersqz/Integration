@@ -40,7 +40,7 @@ namespace Integration.Infra.Repositories
                 WHERE 
                     CAST(PRD001 AS VARCHAR(50)) = ?";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<Produto>(query, new { Id = id.ToString() });
         }
         public async Task<IEnumerable<Produto>> SelecionarTodos(int pagina, int tamanhoPagina)
@@ -74,7 +74,7 @@ namespace Integration.Infra.Repositories
                 ORDER BY
                     PRD001;";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Produto>(query, new { Top = tamanhoPagina, StartAt = startAt });
         }
 
@@ -82,7 +82,7 @@ namespace Integration.Infra.Repositories
         {
             string query = "SELECT COUNT(*) FROM GES_080";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.ExecuteScalarAsync<int>(query);
         }
     }

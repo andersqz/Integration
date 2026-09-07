@@ -34,7 +34,7 @@ namespace Integration.Infra.Repositories
                             ORDER BY
                                 LocalId";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryFirstOrDefaultAsync<Local>(query, new { LocalId = id });
         }
 
@@ -57,7 +57,7 @@ namespace Integration.Infra.Repositories
                                 GES_008 
                             ORDER BY 
                                 LocalId";
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Local>(query);
         }
     }

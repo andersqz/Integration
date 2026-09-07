@@ -19,11 +19,21 @@ namespace Integration.Api.Controllers
         } 
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(
+            [FromQuery] ParametrosPaginacaoDto parametros,
+            [FromQuery] bool incluirItens = false)
         {
-            _logger.LogInformation("Buscando todos os Pedidos.");
-            IEnumerable<PedidoCabecalhoDto> pedidos = await _service.BuscarTodos();
-            return Ok(pedidos);
+            _logger.LogInformation("Buscando Pedidos - página {Pagina}, tamanho {Tamanho}, incluirItens {IncluirItens}",
+                    parametros.Pagina, parametros.TamanhoPagina, incluirItens);
+
+            if (incluirItens)
+            {
+                var pedidoComItens = await _service.BuscarTodosComItens(parametros.Pagina, parametros.TamanhoPagina, incluirItens);
+                return Ok(pedidoComItens);
+            }
+                    
+            var pedidoSemItens = await _service.BuscarTodosSemItens(parametros.Pagina, parametros.TamanhoPagina);
+            return Ok(pedidoSemItens);
         }
 
         [HttpGet("{empresa}/{local}/{serie}/{data}/{doc}")]

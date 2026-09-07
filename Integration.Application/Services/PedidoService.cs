@@ -23,7 +23,7 @@ namespace Integration.Application.Services
             int dataConvert = Util.ConverterDataParaInt(data);
 
             Pedido? p1 = await _repository.SelecionarPorInfo(empresa, local, serie, dataConvert, doc);
-            
+
             if (p1 is null)
                 throw new NotFoundException("Pedido não localizado.");
 
@@ -32,17 +32,46 @@ namespace Integration.Application.Services
             return MapToResponseDetalhes(p1, p2);
         }
 
-        public async Task<IEnumerable<PedidoCabecalhoDto>> BuscarTodos()
+        public async Task<PaginacaoDto<PedidoDetalhesDto>> BuscarTodosComItens(int pagina, int tamanhoPagina, bool incluirItens)
         {
-            IEnumerable<Pedido> pedidos = await _repository.SelecionarTodos();
-            List<PedidoCabecalhoDto> responses = new();
+
+            IEnumerable<Pedido> pedidos = await _repository.SelecionarTodos(pagina, tamanhoPagina);
+            int total = await _repository.ContarTodos();
+
+            List<PedidoDetalhesDto> detalhes = new();
+            IEnumerable<PedidoItem> itens;
 
             foreach (Pedido p in pedidos)
             {
-                responses.Add(MapToResponseCabecalho(p));
+                if (incluirItens)
+                    itens = await _itemRepository.SelecionarPorInfo(p.EmpresaId, p.LocalId, p.Serie, p.DataEmissao, p.Documento);
+                else
+                    itens = Enumerable.Empty<PedidoItem>();
+
+                detalhes.Add(MapToResponseDetalhes(p, itens));
             }
 
-            return responses;
+            return new PaginacaoDto<PedidoDetalhesDto>
+            {
+                Itens = detalhes,
+                PaginaAtual = pagina,
+                TamanhoPagina = tamanhoPagina,
+                TotalRegistros = total
+            };
+        }
+
+        public async Task<PaginacaoDto<PedidoCabecalhoDto>> BuscarTodosSemItens(int pagina, int tamanhoPagina)
+        {
+            IEnumerable<Pedido> pedidos = await _repository.SelecionarTodos(pagina, tamanhoPagina);
+            int total = await _repository.ContarTodos();
+
+            return new PaginacaoDto<PedidoCabecalhoDto>()
+            {
+                Itens = pedidos.Select(MapToResponseCabecalho),
+                PaginaAtual = pagina,
+                TamanhoPagina = tamanhoPagina,
+                TotalRegistros = total
+            };
         }
 
 
@@ -100,7 +129,8 @@ namespace Integration.Application.Services
 
         public PedidoItemDto MapToItem(PedidoItem item)
         {
-            return new PedidoItemDto() {
+            return new PedidoItemDto()
+            {
                 ProdutoId = item.ProdutoId,
                 NumeroSequencia = item.SequenciaItem,
                 TipoProduto = item.TipoProduto,

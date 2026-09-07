@@ -27,16 +27,17 @@ namespace Integration.Infra.Repositories
                                 GES_042
                             WHERE
                                 FOR001 = ?";
-            using var connection = await _connection.CreateConnection();
-            return await connection.QuerySingleOrDefaultAsync<Fornecedor>(query, new {Id = id});
+            var connection = await _connection.CreateConnection();
+            return await connection.QuerySingleOrDefaultAsync<Fornecedor>(query, new { Id = id });
         }
 
-        public async Task<IEnumerable<Fornecedor>> SelecionarTodos()
+        public async Task<IEnumerable<Fornecedor>> SelecionarTodos(int pagina, int tamanhoPagina)
         {
+            int startAt = ((pagina - 1) * tamanhoPagina) + 1;
+
             string query = @"
-                            SET ROWCOUNT 100;
                             
-                            SELECT 
+                            SELECT TOP ? START AT ?
                                 EMPRESA AS EmpresaId,
                                 FOR001 AS FornecedorId,
                                 FOR002 AS Nome,
@@ -46,8 +47,17 @@ namespace Integration.Infra.Repositories
                                 FOR011 AS Email
                             FROM
                                 GES_042";
-            using var connection = await _connection.CreateConnection();
-            return await connection.QueryAsync<Fornecedor>(query);
+            var connection = await _connection.CreateConnection();
+            return await connection.QueryAsync<Fornecedor>(query, new { Top = tamanhoPagina, StartAt = startAt });
+        }
+
+
+        public async Task<int> ContarTodos()
+        {
+            string query = "SELECT COUNT(*) FROM GES_040";
+
+            var connection = await _connection.CreateConnection();
+            return await connection.ExecuteScalarAsync<int>(query);
         }
     }
 }

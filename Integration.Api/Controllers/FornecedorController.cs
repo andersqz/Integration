@@ -19,10 +19,12 @@ namespace Integration.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] ParametrosPaginacaoDto parametros)
         {
-            _logger.LogInformation("Buscando todos os fornecedores");
-            IEnumerable<FornecedorDto> fornecedores = await _service.BuscarTodos();
+            _logger.LogInformation("Buscando Fornecedores - página {Pagina}, tamanho {Tamanho}", 
+                parametros.Pagina, parametros.TamanhoPagina);
+                
+            var fornecedores = await _service.BuscarTodos(parametros.Pagina, parametros.TamanhoPagina);
             return Ok(fornecedores);
         }
 

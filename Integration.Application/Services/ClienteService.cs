@@ -37,16 +37,18 @@ namespace Integration.Application.Services
         /// busca todos clientes do banco atraves do repository e retorna ele resumido
         /// </summary>
         /// <returns>lista de clientes</returns>
-        public async Task<List<ClienteDto>> BuscarTodos()
+        public async Task<PaginacaoDto<ClienteDto>> BuscarTodos(int pagina, int tamanhoPagina)
         {
-            IEnumerable<Cliente> clientes = await _repository.SelecionarTodos();
-            List<ClienteDto> responses = new();
+            IEnumerable<Cliente> clientes = await _repository.SelecionarTodos(pagina, tamanhoPagina);
+            int total = await _repository.ContarTodos();
 
-            foreach (Cliente c in clientes)
+            return new PaginacaoDto<ClienteDto>()
             {
-                responses.Add(MapToResponse(c));
-            }
-            return responses;
+                Itens = clientes.Select(MapToResponse),
+                PaginaAtual = pagina,
+                TamanhoPagina = tamanhoPagina,
+                TotalRegistros = total
+            };
         }
 
         /// <summary>
