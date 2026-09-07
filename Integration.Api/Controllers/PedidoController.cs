@@ -19,10 +19,10 @@ namespace Integration.Api.Controllers
         } 
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] ParametrosPaginacaoDto parametros)
         {
-            _logger.LogInformation("Buscando todos os Pedidos.");
-            IEnumerable<PedidoCabecalhoDto> pedidos = await _service.BuscarTodos();
+            _logger.LogInformation("Buscando Pedidos");
+            var pedidos = await _service.BuscarTodos(parametros.Pagina, parametros.TamanhoPagina);
             return Ok(pedidos);
         }
 
