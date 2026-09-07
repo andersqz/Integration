@@ -24,7 +24,7 @@ namespace Integration.Infra.Repositories
                             ORDER BY 
                                 CodigoEmpresa";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryFirstOrDefaultAsync<Empresa>(query, new { CodigoEmpresa = id });
         }
 
@@ -40,7 +40,7 @@ namespace Integration.Infra.Repositories
                             ORDER BY 
                                 CodigoEmpresa";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Empresa>(query);
         }
     }

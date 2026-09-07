@@ -5,9 +5,10 @@ using System.Data.Odbc;
 
 namespace Integration.Infra.Data
 {
-    public class OdbcConnectionFactory : IDbConnectionFactory
+    public class OdbcConnectionFactory : IDbConnectionFactory, IDisposable
     {
         private readonly string _connectionString;
+        private IDbConnection? _connection;
 
         public OdbcConnectionFactory(string connectionString)
         {
@@ -16,11 +17,19 @@ namespace Integration.Infra.Data
 
         public async Task<IDbConnection> CreateConnection()
         {
-            var connection = new OdbcConnection(_connectionString);
+            if (_connection is null)
+            {
+                var connection = new OdbcConnection(_connectionString);
+                await connection.OpenAsync();
+                _connection = connection;
+            }
 
-            await connection.OpenAsync();
+            return _connection;
+        }
 
-            return connection;
+        public void Dispose()
+        {
+            _connection?.Dispose();
         }
     }
 }

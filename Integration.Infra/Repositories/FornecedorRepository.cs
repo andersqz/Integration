@@ -27,7 +27,7 @@ namespace Integration.Infra.Repositories
                                 GES_042
                             WHERE
                                 FOR001 = ?";
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<Fornecedor>(query, new { Id = id });
         }
 
@@ -47,7 +47,7 @@ namespace Integration.Infra.Repositories
                                 FOR011 AS Email
                             FROM
                                 GES_042";
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Fornecedor>(query, new { Top = tamanhoPagina, StartAt = startAt });
         }
 
@@ -56,7 +56,7 @@ namespace Integration.Infra.Repositories
         {
             string query = "SELECT COUNT(*) FROM GES_040";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.ExecuteScalarAsync<int>(query);
         }
     }

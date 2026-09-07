@@ -32,7 +32,7 @@ namespace Integration.Application.Services
             return MapToResponseDetalhes(p1, p2);
         }
 
-        public async Task<PaginacaoDto<PedidoDetalhesDto>> BuscarTodos(int pagina, int tamanhoPagina, bool incluirItens)
+        public async Task<PaginacaoDto<PedidoDetalhesDto>> BuscarTodosComItens(int pagina, int tamanhoPagina, bool incluirItens)
         {
 
             IEnumerable<Pedido> pedidos = await _repository.SelecionarTodos(pagina, tamanhoPagina);
@@ -45,7 +45,7 @@ namespace Integration.Application.Services
             {
                 if (incluirItens)
                     itens = await _itemRepository.SelecionarPorInfo(p.EmpresaId, p.LocalId, p.Serie, p.DataEmissao, p.Documento);
-                else    
+                else
                     itens = Enumerable.Empty<PedidoItem>();
 
                 detalhes.Add(MapToResponseDetalhes(p, itens));
@@ -54,6 +54,20 @@ namespace Integration.Application.Services
             return new PaginacaoDto<PedidoDetalhesDto>
             {
                 Itens = detalhes,
+                PaginaAtual = pagina,
+                TamanhoPagina = tamanhoPagina,
+                TotalRegistros = total
+            };
+        }
+
+        public async Task<PaginacaoDto<PedidoCabecalhoDto>> BuscarTodosSemItens(int pagina, int tamanhoPagina)
+        {
+            IEnumerable<Pedido> pedidos = await _repository.SelecionarTodos(pagina, tamanhoPagina);
+            int total = await _repository.ContarTodos();
+
+            return new PaginacaoDto<PedidoCabecalhoDto>()
+            {
+                Itens = pedidos.Select(MapToResponseCabecalho),
                 PaginaAtual = pagina,
                 TamanhoPagina = tamanhoPagina,
                 TotalRegistros = total

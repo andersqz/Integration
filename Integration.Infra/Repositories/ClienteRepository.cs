@@ -36,7 +36,7 @@ namespace Integration.Infra.Repositories
                             WHERE 
                                 CLI001 = ?";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<Cliente>(query, new { Id = id });
         }
 
@@ -68,7 +68,7 @@ namespace Integration.Infra.Repositories
                     CLI001;
             ";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<Cliente>(query, new {Top = tamanhoPagina, StartAt = startAt});
         }
 
@@ -77,7 +77,7 @@ namespace Integration.Infra.Repositories
         {
             string query = "SELECT COUNT(*) FROM GES_040";
 
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.ExecuteScalarAsync<int>(query);
         }
     }

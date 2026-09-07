@@ -22,7 +22,7 @@ namespace Integration.Infra.Repositories
                                 GES_064
                             WHERE
                                 TOP001 = ?";
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<OperacaoFiscal>(query, new {Id = id});
         }
 
@@ -34,7 +34,7 @@ namespace Integration.Infra.Repositories
                                 TOP002 AS Descricao
                             FROM 
                                 GES_064";
-            using var connection = await _connection.CreateConnection();
+            var connection = await _connection.CreateConnection();
             return await connection.QueryAsync<OperacaoFiscal>(query);
         }
     }
