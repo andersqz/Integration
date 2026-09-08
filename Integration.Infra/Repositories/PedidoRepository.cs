@@ -16,40 +16,23 @@ namespace Integration.Infra.Repositories
         public async Task<Pedido?> SelecionarPorInfo(int empresa, int local, string serie, int data, int doc)
         {
             string query = @"SELECT
-                                EMPRESA AS EmpresaId,
-                                NPC001 AS LocalId,
-                                NPC002 AS Serie,
-                                NPC003 AS DataEmissao,
-                                NPC004 AS Documento,
-                                NPC005 AS ClienteId,
-                                NPC006 AS VendedorId,
-                                NPC007 AS OperacaoFiscal,
-                                NPC011 AS UltimaAlteracao,
-                                NPC080 AS NomeCliente,
-                                Trim(NPC081) AS EnderecoCliente,
-                                NPC082 AS CepCliente,
-                                NPC083 AS CidadeCliente,
-                                NPC084 AS UF,
-                                NPC085 AS CpfCnpj,
-                                NPC086 AS InscricaoEstadual,
-                                NPC087 AS TipoPessoa,
-                                NPC089 AS Telefone,
-                                NPC050 AS TransportadoraId
-                            FROM
-                                GES_230
-                            WHERE
-                                NPC001 = ?
-                            AND
-                                EMPRESA = ?
-                            AND
-                                NPC002 = ?
-                            AND 
-                                NPC003 = ?
-                            AND 
-                                NPC004 = ?";
+                        ...
+                    FROM
+                        GES_230
+                    WHERE
+                        NPC001 = ?
+                    AND
+                        EMPRESA = ?
+                    AND
+                        NPC002 = ?
+                    AND 
+                        NPC003 = ?
+                    AND 
+                        NPC004 = ?";
 
             var connection = await _connection.CreateConnection();
-            return await connection.QuerySingleOrDefaultAsync<Pedido>(query, new { EMPRESA = empresa, NPC001 = local, NPC002 = serie, NPC003 = data, NPC004 = doc });
+            return await connection.QuerySingleOrDefaultAsync<Pedido>(query,
+                new { NPC001 = local, EMPRESA = empresa, NPC002 = serie, NPC003 = data, NPC004 = doc });
         }
 
         public async Task<IEnumerable<Pedido>> SelecionarTodos(int pagina, int tamanhoPagina)
