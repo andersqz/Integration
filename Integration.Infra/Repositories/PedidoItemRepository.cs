@@ -1,4 +1,3 @@
-
 using Dapper;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
@@ -36,9 +35,11 @@ namespace Integration.Infra.Repositories
                             AND IPC002 = ?
                             AND IPC003 = ?
                             AND IPC004 = ?";
-            
+
             var connection = await _connection.CreateConnection();
-            return await connection.QueryAsync<PedidoItem>(query, new { EMPRESA = empresa, IPC001 = local, IPC002 = serie, IPC003 = data, IPC004 = doc });
+            return await connection.QueryAsync<PedidoItem>(query,
+                new { IPC001 = local, EMPRESA = empresa, IPC002 = serie, IPC003 = data, IPC004 = doc });
+            //        1ª = 1º ?        2ª = 2º ?         3ª = 3º ?       4ª = 4º ?      5ª = 5º ?
         }
     }
 }

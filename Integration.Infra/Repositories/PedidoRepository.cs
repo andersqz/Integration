@@ -1,5 +1,3 @@
-
-
 using Dapper;
 using Integration.Domain.Entities;
 using Integration.Domain.Interfaces;
@@ -49,7 +47,8 @@ namespace Integration.Infra.Repositories
                                 NPC004 = ?";
 
             var connection = await _connection.CreateConnection();
-            return await connection.QuerySingleOrDefaultAsync<Pedido>(query, new { EMPRESA = empresa, NPC001 = local, NPC002 = serie, NPC003 = data, NPC004 = doc });
+            return await connection.QuerySingleOrDefaultAsync<Pedido>(query,
+                new { NPC001 = local, EMPRESA = empresa, NPC002 = serie, NPC003 = data, NPC004 = doc });
         }
 
         public async Task<IEnumerable<Pedido>> SelecionarTodos(int pagina, int tamanhoPagina)
